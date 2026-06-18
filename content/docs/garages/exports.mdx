@@ -1,0 +1,49 @@
+---
+title: Exports
+---
+## Sever exports
+Gets all player vehicle or if using garage id it'll only get the vehicles on that garage
+```lua copy
+---@param source integer
+---@param garage string
+exports.mt_garages:getVehicles(source, garage)
+```
+## Client exports
+
+**Take vehicle out**
+Use the vehicle last location take out, usefull to integrate with phones garages app in the locate vehicle functions
+```lua copy
+---@param plate string
+exports.mt_garages:takeVehicleOut(plate)
+```
+
+**Open garage menu**
+This will open the garage menu, usefull for housing integrations for example
+```lua copy
+---@param garageId string
+exports.mt_garages:openGarageMenu(garageId)
+```
+
+**Store vehicle in garage**
+This will store the vehicle in the garage, usefull for housing integrations for example
+```lua copy
+---@param garageId string
+exports.mt_garages:storeVehicleInGarage(garageId)
+```
+
+**Open impound menu**
+This just literally opens the impound menu, you can either use the export or the event
+```lua copy
+exports.mt_garages:openImpound()
+```
+```lua copy
+TriggerEvent('mt_garages:client:openImpound')
+```
+
+**Impound vehicle**
+This will impound a vehicle directly, it'll ignore any job checks, keep that in mind.
+```lua copy
+---@param plate string
+---@param price number
+exports.mt_garages:impoundVehicle(plate, price)
+```

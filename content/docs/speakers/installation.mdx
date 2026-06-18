@@ -1,0 +1,55 @@
+---
+title: Installation
+---
+# This is the installation for the 2.0 version!!
+
+## SQL
+Run the following SQL query to your data base
+```lua copy 
+CREATE TABLE `speakers` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`item` VARCHAR(50) NULL DEFAULT NULL,
+	`location` LONGTEXT NULL DEFAULT '[]',
+	`users` LONGTEXT NULL DEFAULT '[]',
+	PRIMARY KEY (`id`) USING BTREE
+);
+
+CREATE TABLE `speakers_musics` (
+	`musicId` INT(11) NOT NULL AUTO_INCREMENT,
+	`citizenid` VARCHAR(50) NOT NULL,
+	`label` LONGTEXT NOT NULL,
+	`url` LONGTEXT NOT NULL,
+	PRIMARY KEY (`musicId`) USING BTREE
+);
+```
+
+## OX Inventory items 
+```lua copy
+	['low_speaker'] = {
+        label = 'Low Speaker',
+        weight = 200,
+        stack = true,
+        close = true,
+        client = {
+            export = 'mt_speakers.useSpeaker'
+        }
+    },
+    ['medium_speaker'] = {
+        label = 'Medium Speaker',
+        weight = 200,
+        stack = true,
+        close = true,
+        client = {
+            export = 'mt_speakers.useSpeaker'
+        }
+    },
+    ['high_speaker'] = {
+        label = 'Party Speaker',
+        weight = 200,
+        stack = true,
+        close = true,
+        client = {
+            export = 'mt_speakers.useSpeaker'
+        }
+    },
+```

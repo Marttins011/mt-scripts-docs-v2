@@ -1,0 +1,30 @@
+{
+  "index": "Introduction",
+  "paid": {
+    "title": "Paid scripts",
+    "type": "separator"
+  },
+  "containers": "MT Containers",
+  "nitrous": "MT Nitrous",
+  "restaurants": "MT Restaurants v2",
+  "restaurantsv3": "MT Restaurants v3",
+  "garages": "MT Garages",
+  "dealerships": "MT Dealerships v2",
+  "workshops": "MT Workshops v2",
+  "mining": "MT Mining",
+  "huntingshack": "MT Hunting Shack",
+  "hunting": "MT Hunting",
+  "hud": "MT HUD Remastered",
+  "free": {
+    "title": "Free scripts",
+    "type": "separator"
+  },
+  "lib": "MT Lib",
+  "speakers": "MT Speakers",
+  "contact": {
+    "title": "Store",
+    "type": "page",
+    "href": "https://mt-scripts.tebex.io",
+    "newWindow": true
+  }
+}

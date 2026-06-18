@@ -1,0 +1,76 @@
+---
+title: Configuration
+---
+## Client config 
+This is the client config file:
+```lua filename="mt_garages/config/client.lua"
+return {
+    garageAccessProp = 'prop_park_ticket_01',
+    impoundPed = 'ig_trafficwarden',
+    blips = {
+        garage = {
+        sprite = 357,
+        display = 4,
+            scale = 0.6,
+            color = 0
+        },
+        impound = {
+            sprite = 68,
+            display = 4,
+            scale = 0.6,
+            color = 0
+        }
+    }
+}
+```
+
+## Shared config 
+This is the shared config file:
+```lua filename="mt_garages/config/shared.lua"
+return {
+    debug = true,
+    zonesDebug = false
+}
+```
+
+## Server config 
+This is the server config file:
+```lua filename="mt_garages/config/server.lua"
+return {
+    commands = {
+        creator = {
+            command = "garagecreator", -- Command to open the garage creator
+            description = "Open the garage creator",
+            restricted = "group.admin" -- Ace permission to use the command
+        },
+        impound = {
+            command = "impound", -- Command to open the impound
+            description = "Impound a vehicle"
+        },
+        recoverVehicle = {
+            command = "recovervehicle", -- Command to recover a vehicle to a specific garage
+            description = "Recover a vehicle by plate to a specific garage (Staff only)",
+            restricted = "group.admin" -- Ace permission to use the command
+        }
+    },
+
+    recovery = {
+        price = 500, -- Price to recover a vehicle that is out of garage
+        enabled = true -- Whether recovery is enabled
+    },
+
+    -- Vehicle properties to save when storing vehicles
+    -- Only these properties will be updated to the database
+    vehicleProperties = {
+        bodyHealth = true, -- Vehicle body damage
+        engineHealth = true, -- Engine damage
+        tankHealth = true, -- Fuel tank damage
+        fuelLevel = true, -- Current fuel level
+        oilLevel = true, -- Engine oil level
+        dirtLevel = true, -- Vehicle dirt level
+        windows = true, -- Window damage states
+        doors = true, -- Door damage states
+        tyres = true -- Tire damage states
+    }
+}
+```
