@@ -1,0 +1,95 @@
+---
+title: Exports
+---
+# Explore our development exports
+
+## server exports
+
+**Create shop**
+Registers a new shop dynamically on the server and propagates it to all online clients.
+```lua
+---@param shopId string
+---@param data ShopConfig
+---@return boolean success
+exports.mt_shops:CreateShop(shopId, data)
+```
+
+**Add shop items**
+Appends items dynamically to an already registered shop.
+```lua
+---@param shopId string
+---@param items ShopItem[]
+---@return boolean success
+exports.mt_shops:AddShopItems(shopId, items)
+```
+
+**Add category**
+Registers a new category filter dynamically and syncs it to all clients.
+```lua
+---@param categoryName string
+---@param categoryData ShopCategory
+---@return boolean success
+exports.mt_shops:AddCategory(categoryName, categoryData)
+```
+
+**Open shop for player**
+Forces the shop UI interface to open for a specific player.
+```lua
+---@param playerId number
+---@param shopId string
+---@return boolean success
+exports.mt_shops:OpenShopForPlayer(playerId, shopId)
+```
+
+## Type definitions
+
+```lua
+---@class ShopBlip
+---@field sprite? number
+---@field id? number
+---@field color? number
+---@field colour? number
+---@field scale? number
+
+---@class ShopItem
+---@field name string
+---@field price? number
+---@field stock? number
+---@field category? string
+---@field metadata? table
+---@field license? string
+---@field sell? number
+---@field sellToStock? boolean
+
+---@class ShopLocation
+---@field coords vector3
+---@field size? vector3
+---@field rotation? number
+---@field distance? number
+---@field ped? string
+---@field heading? number
+
+---@class ShopPayments
+---@field bank? boolean
+---@field cash? boolean
+---@field society? boolean
+
+---@class ShopItemsList : ShopItem[]
+---@field sell? ShopItem[]
+
+---@class ShopConfig
+---@field label? string
+---@field name? string
+---@field description? string
+---@field blip? ShopBlip
+---@field items ShopItemsList
+---@field locations? ShopLocation[]
+---@field payments? ShopPayments
+---@field model? (number|string)[]
+---@field job? string
+---@field grade? number
+
+---@class ShopCategory
+---@field label string
+---@field icon string
+```

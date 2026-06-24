@@ -4,17 +4,18 @@
     "title": "Paid scripts",
     "type": "separator"
   },
-  "containers": "MT Containers",
-  "nitrous": "MT Nitrous",
-  "restaurants": "MT Restaurants v2",
+  "shops": "MT Shops",
   "restaurantsv3": "MT Restaurants v3",
+  "restaurants": "MT Restaurants v2",
+  "hunting": "MT Hunting",
+  "hud": "MT HUD Remastered",
   "garages": "MT Garages",
   "dealerships": "MT Dealerships v2",
   "workshops": "MT Workshops v2",
   "mining": "MT Mining",
   "huntingshack": "MT Hunting Shack",
-  "hunting": "MT Hunting",
-  "hud": "MT HUD Remastered",
+  "containers": "MT Containers",
+  "nitrous": "MT Nitrous",
   "free": {
     "title": "Free scripts",
     "type": "separator"
