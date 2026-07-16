@@ -1,0 +1,75 @@
+---
+title: Exports
+---
+# Explore our development exports
+
+## Client Exports
+
+### hasKey
+Checks if the player has a key for the specified vehicle plate.
+```lua
+---@param plate string
+---@return boolean hasKey
+exports.mt_vehiclekeys:hasKey(plate)
+```
+
+### addKey
+Adds a key for the specified vehicle plate.
+```lua
+---@param plate string
+exports.mt_vehiclekeys:addKey(plate)
+```
+
+### removeKey
+Removes a key for the specified vehicle plate.
+```lua
+---@param plate string
+exports.mt_vehiclekeys:removeKey(plate)
+```
+
+### setLockState
+Sets the lock state of a vehicle entity.
+```lua
+---@param vehicle number
+---@param lockState number
+---@return boolean success
+exports.mt_vehiclekeys:setLockState(vehicle, lockState)
+```
+
+---
+
+## Server Exports
+
+### hasKey
+Checks if a player has a key for the specified vehicle plate.
+```lua
+---@param src number
+---@param plate string
+---@return boolean hasKey
+exports.mt_vehiclekeys:hasKey(src, plate)
+```
+
+### addKey
+Adds a key for the specified vehicle plate to the player.
+```lua
+---@param src number
+---@param plate string
+exports.mt_vehiclekeys:addKey(src, plate)
+```
+
+### removeKey
+Removes a key for the specified vehicle plate from the player.
+```lua
+---@param src number
+---@param plate string
+exports.mt_vehiclekeys:removeKey(src, plate)
+```
+
+### setLockState
+Sets the lock state of a vehicle entity and updates its state bag.
+```lua
+---@param vehicle number
+---@param lockState number
+---@return boolean success
+exports.mt_vehiclekeys:setLockState(vehicle, lockState)
+```
