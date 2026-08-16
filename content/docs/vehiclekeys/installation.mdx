@@ -1,0 +1,35 @@
+---
+title: Installation
+---
+# Learn how to install our Vehicle Keys script
+
+## Inventory Items
+This are the items to add in the `ox_inventory\data\items.lua`
+```lua copy
+	['vehiclekey'] = {
+		label = 'Vehicle Key',
+		useable = false
+	},
+	['vehiclekeychain'] = {
+		label = 'Vehicle Key Chain',
+		weight = 150,
+		stack = false,
+		close = false
+	}
+```
+
+## Inventory Containers
+Add the following code in the `ox_inventory\modules\items\containers.lua`
+```lua copy
+setContainerProperties('vehiclekeychain', {
+	slots = 10,
+	maxWeight = 1000,
+	whitelist = { 'vehiclekey' }
+})
+```
+
+<div>
+  <strong>That's it, the script is installed!</strong>
+  <p className="mt-2">Everything else in the script will be automatically configured: framework, database, etc.</p>
+  <p className="mt-2">If you need help with anything extra, please open ticket in our discord.</p>
+</div>

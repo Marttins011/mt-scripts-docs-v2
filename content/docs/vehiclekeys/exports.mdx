@@ -28,12 +28,20 @@ exports.mt_vehiclekeys:removeKey(plate)
 ```
 
 ### setLockState
-Sets the lock state of a vehicle entity.
+Gets the current lock state of a vehicle entity.
 ```lua
 ---@param vehicle number
 ---@param lockState number
 ---@return boolean success
 exports.mt_vehiclekeys:setLockState(vehicle, lockState)
+```
+
+### getLockState
+Sets the lock state of a vehicle entity.
+```lua
+---@param vehicle number
+---@return number state
+exports.mt_vehiclekeys:getLockState(vehicle)
 ```
 
 ---
@@ -72,4 +80,12 @@ Sets the lock state of a vehicle entity and updates its state bag.
 ---@param lockState number
 ---@return boolean success
 exports.mt_vehiclekeys:setLockState(vehicle, lockState)
+```
+
+### getLockState
+Gets the current lock state of a vehicle entity.
+```lua
+---@param vehicle number
+---@return number state
+exports.mt_vehiclekeys:getLockState(vehicle)
 ```
