@@ -13,3 +13,47 @@ This will return the active percentage of requested buff
 ---@return number
 exports.mt_restaurants:getBuff(source, buffid)
 ```
+
+**Get restaurants**
+Gets all restaurant and food truck configurations
+```lua
+--- @return table[] restaurants List of all restaurant configuration objects
+exports.mt_restaurants:getRestaurants()
+```
+
+**Get restaurant recipes**
+Gets all recipes registered for a specific restaurant directly from memory cache
+```lua
+--- @param restaurantId string|number The ID of the restaurant.
+--- @return table[] recipes Array of recipe objects for the specified restaurant.
+exports.mt_restaurants:getRestaurantRecipes(restaurantId)
+```
+
+**Get offline shop items**
+Gets all items and stock currently stored in the offline shop for a restaurant
+```lua
+--- @param restaurantId string|number The ID of the restaurant.
+--- @return table[] items List of inventory items in the offline shop stash.
+exports.mt_restaurants:getOfflineShopItems(restaurantId)
+```
+
+**Add offline shop stock**
+Adds item stock to the offline shop stash for a restaurant
+```lua
+--- @param restaurantId string|number The ID of the restaurant.
+--- @param itemName string Name of the item to add.
+--- @param quantity number Amount of the item to add (must be > 0).
+--- @param metadata? table Optional item metadata.
+--- @return boolean success True if stock was added successfully, false otherwise.
+exports.mt_restaurants:addOfflineShopStock(restaurantId, itemName, quantity, metadata)
+```
+
+**Remove offline shop stock**
+Removes item stock from the offline shop for a restaurant. Checks if sufficient stock exists before removing
+```lua
+--- @param restaurantId string|number The ID of the restaurant.
+--- @param itemName string Name of the item to remove.
+--- @param quantity number Amount of the item to remove (must be > 0).
+--- @return boolean success True if stock was removed, false if item/stock is missing or insufficient.
+exports.mt_restaurants:removeOfflineShopStock(restaurantId, itemName, quantity)
+```
