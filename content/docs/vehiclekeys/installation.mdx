@@ -15,7 +15,17 @@ This are the items to add in the `ox_inventory\data\items.lua`
 		weight = 150,
 		stack = false,
 		close = false
-	}
+	},
+	['vehicle_lock'] = {
+        label = 'Vehicle Lock',
+        useable = true,
+        weight = 500,
+        stack = true,
+        close = true,
+        client = {
+            export = 'mt_vehiclekeys.useVehicleLock'
+        }
+    },
 ```
 
 ## Inventory Containers
