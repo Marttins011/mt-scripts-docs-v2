@@ -374,6 +374,17 @@ This items are optinal, you can edit the ingredients in the `mt_restaurants\data
 ```
 
 ## Inventory images provider
+In your ox_inventory convars configuration, update the `inventory:validhosts` convar to this:
+```lua copy
+set inventory:validhosts {
+    "r2.fivemanage.com": true,
+    "i.fmfile.com": true,
+    "upload.mt-scripts.com": true,
+    "k8kmkccdhq4bghqi.public.blob.vercel-storage.com": true
+}
+```
+
+If you're in an outdated version of ox_inventory:
 In the `ox_inventory\modules\utils\server.lua`, add this new provider URL.
 ```lua copy
 ['k8kmkccdhq4bghqi.public.blob.vercel-storage.com'] = true,
