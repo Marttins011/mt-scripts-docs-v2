@@ -57,3 +57,38 @@ Removes item stock from the offline shop for a restaurant. Checks if sufficient 
 --- @return boolean success True if stock was removed, false if item/stock is missing or insufficient.
 exports.mt_restaurants:removeOfflineShopStock(restaurantId, itemName, quantity)
 ```
+
+**Register server hook**
+Registers a callback listener for lifecycle events (`OnItemPrepared`, `OnOrderCompleted`, `OnOrderStatusChanged`). Supports optional filtering
+```lua
+--- @param event string Event name ('OnItemPrepared', 'OnOrderCompleted', 'OnOrderStatusChanged').
+--- @param callback function Function to execute when event triggers.
+--- @param options? table Optional filters: { restaurantFilter = string|number|table, jobFilter = string|table, itemFilter = string|table }.
+--- @return number hookId Unique ID of the registered hook (used to remove).
+exports.mt_restaurants:registerHook(event, callback, options)
+```
+
+**Remove server hook**
+Unregisters a previously registered server hook by its ID
+```lua
+--- @param hookId number The ID of the hook returned by registerHook.
+--- @return boolean success True if the hook was found and removed, false otherwise.
+exports.mt_restaurants:removeHook(hookId)
+```
+
+**Get restaurant orders history**
+Gets historical completed orders from the database for a specific restaurant
+```lua
+--- @param restaurantId string|number The ID of the restaurant.
+--- @param limit? number Optional max number of records to return (defaults to 100).
+--- @return table[] orders List of order objects with decoded orderData, citizen IDs, and items.
+exports.mt_restaurants:getRestaurantOrdersHistory(restaurantId, limit)
+```
+
+**Get restaurant statistics**
+Gets aggregated revenue and order count statistics for a restaurant
+```lua
+--- @param restaurantId string|number The ID of the restaurant.
+--- @return table stats Object containing dayRevenue, dayOrders, monthRevenue, monthOrders, totalRevenue, and totalOrders.
+exports.mt_restaurants:getRestaurantStatistics(restaurantId)
+```
