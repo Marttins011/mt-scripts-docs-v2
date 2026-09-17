@@ -3,10 +3,11 @@ title: Exports
 ---
 # Explore our development exports
 
-## server exports
+## Server exports
 
 **Get buffs values**
 This will return the active percentage of requested buff
+
 ```lua
 ---@param source number
 ---@param buffid string
@@ -16,6 +17,7 @@ exports.mt_restaurants:getBuff(source, buffid)
 
 **Get restaurants**
 Gets all restaurant and food truck configurations
+
 ```lua
 --- @return table[] restaurants List of all restaurant configuration objects
 exports.mt_restaurants:getRestaurants()
@@ -23,6 +25,7 @@ exports.mt_restaurants:getRestaurants()
 
 **Get restaurant recipes**
 Gets all recipes registered for a specific restaurant directly from memory cache
+
 ```lua
 --- @param restaurantId string|number The ID of the restaurant.
 --- @return table[] recipes Array of recipe objects for the specified restaurant.
@@ -31,6 +34,7 @@ exports.mt_restaurants:getRestaurantRecipes(restaurantId)
 
 **Get offline shop items**
 Gets all items and stock currently stored in the offline shop for a restaurant
+
 ```lua
 --- @param restaurantId string|number The ID of the restaurant.
 --- @return table[] items List of inventory items in the offline shop stash.
@@ -39,6 +43,7 @@ exports.mt_restaurants:getOfflineShopItems(restaurantId)
 
 **Add offline shop stock**
 Adds item stock to the offline shop stash for a restaurant
+
 ```lua
 --- @param restaurantId string|number The ID of the restaurant.
 --- @param itemName string Name of the item to add.
@@ -50,6 +55,7 @@ exports.mt_restaurants:addOfflineShopStock(restaurantId, itemName, quantity, met
 
 **Remove offline shop stock**
 Removes item stock from the offline shop for a restaurant. Checks if sufficient stock exists before removing
+
 ```lua
 --- @param restaurantId string|number The ID of the restaurant.
 --- @param itemName string Name of the item to remove.
@@ -58,8 +64,11 @@ Removes item stock from the offline shop for a restaurant. Checks if sufficient 
 exports.mt_restaurants:removeOfflineShopStock(restaurantId, itemName, quantity)
 ```
 
+## Server hooks
+
 **Register server hook**
 Registers a callback listener for lifecycle events (`OnItemPrepared`, `OnOrderCompleted`, `OnOrderStatusChanged`). Supports optional filtering
+
 ```lua
 --- @param event string Event name ('OnItemPrepared', 'OnOrderCompleted', 'OnOrderStatusChanged').
 --- @param callback function Function to execute when event triggers.
@@ -70,6 +79,7 @@ exports.mt_restaurants:registerHook(event, callback, options)
 
 **Remove server hook**
 Unregisters a previously registered server hook by its ID
+
 ```lua
 --- @param hookId number The ID of the hook returned by registerHook.
 --- @return boolean success True if the hook was found and removed, false otherwise.
@@ -78,6 +88,7 @@ exports.mt_restaurants:removeHook(hookId)
 
 **Get restaurant orders history**
 Gets historical completed orders from the database for a specific restaurant
+
 ```lua
 --- @param restaurantId string|number The ID of the restaurant.
 --- @param limit? number Optional max number of records to return (defaults to 100).
@@ -87,6 +98,7 @@ exports.mt_restaurants:getRestaurantOrdersHistory(restaurantId, limit)
 
 **Get restaurant statistics**
 Gets aggregated revenue and order count statistics for a restaurant
+
 ```lua
 --- @param restaurantId string|number The ID of the restaurant.
 --- @return table stats Object containing dayRevenue, dayOrders, monthRevenue, monthOrders, totalRevenue, and totalOrders.
