@@ -85,22 +85,130 @@ exports.mt_restaurants:getRestaurantStatistics(restaurantId)
 
 ## Server hooks
 
-**Register server hook**
-Registers a callback listener for lifecycle events (`OnItemPrepared`, `OnOrderCompleted`, `OnOrderStatusChanged`). Supports optional filtering
+### Types & Definitions
 
 ```lua
---- @param event string Event name ('OnItemPrepared', 'OnOrderCompleted', 'OnOrderStatusChanged').
---- @param callback function Function to execute when event triggers.
---- @param options? table Optional filters: { restaurantFilter = string|number|table, jobFilter = string|table, itemFilter = string|table }.
---- @return number hookId Unique ID of the registered hook (used to remove).
+---@class HookOptions
+---@field restaurantFilter? number|string|table Optional restaurant ID(s) filter
+---@field jobFilter? string|table Optional business job name(s) filter
+---@field itemFilter? string|table Optional item/recipe name(s) filter
+
+---@class PreparedItemPayload
+---@field preparationId string Unique preparation session identifier
+---@field employeeSource number Server ID of the employee
+---@field citizenId? string Citizen ID of the employee (nil if not found)
+---@field employeeName string Full character name of the employee
+---@field restaurantId string|number Restaurant identifier
+---@field job string Business job name
+---@field recipeId string|number Recipe or ingredient identifier
+---@field outputItem string Output item identifier granted to inventory
+---@field outputItemLabel? string Display name of the output item
+---@field quantity number Quantity of output item produced
+---@field inputQuantity number Multiplier / input units consumed
+---@field metadata? table Item metadata (durability, buffs, stats)
+---@field isCustomCraft boolean True if created via custom craft menu
+---@field isStationRecipe boolean True if crafted at a kitchen/drink station
+---@field sourceInventory string|number Source inventory identifier ingredients were pulled from
+---@field targetInventory string|number Target inventory identifier output was granted to
+---@field timestamp number Unix epoch timestamp (os.time())
+
+---@class OrderItemLine
+---@field recipeId string|number Recipe or item identifier
+---@field itemName string Item registry name
+---@field label string Item display label
+---@field price number Unit price
+---@field quantity number Quantity ordered
+---@field metadata? table Custom metadata attached to item
+
+---@class OrderCompletedPayload
+---@field orderId string Unique alphanumeric order code
+---@field employeeSource? number Server ID of the employee who took the order (nil for offline shops)
+---@field citizenId? string Citizen ID of the employee
+---@field employeeName string Employee character name
+---@field customerSource number Server ID of the customer who paid
+---@field customerCitizenId? string Citizen ID of the customer
+---@field customerName string Customer character name
+---@field restaurantId string|number Restaurant identifier
+---@field job string Business job name
+---@field total number Final order total paid
+---@field tip number Tip amount paid (if applicable)
+---@field discount number Percentage discount applied (0 - 100)
+---@field orderType "pos"|"drivethrough"|"delivery"|"offline_shop" Sales channel used
+---@field paymentStatus "paid" Status of the payment
+---@field moneyType "cash"|"bank" Payment method used
+---@field items OrderItemLine[] Array of ordered line items
+---@field timestamp number Unix epoch timestamp (os.time())
+
+---@class OrderStatusChangedPayload
+---@field orderId string Unique alphanumeric order code
+---@field restaurantId string|number Restaurant identifier
+---@field job string Business job name
+---@field previousState "pending"|"paid"|"cancelled"|"refunded"|string Previous lifecycle state
+---@field newState "pending"|"paid"|"cancelled"|"refunded"|string New lifecycle state
+---@field employeeSource? number Server ID of employee involved
+---@field citizenId? string Citizen ID of employee involved
+---@field employeeName string Employee character name
+---@field customerSource? number Server ID of customer involved
+---@field customerCitizenId? string Citizen ID of customer involved
+---@field customerName string Customer character name
+---@field total number Total price amount of the order
+---@field timestamp number Unix epoch timestamp (os.time())
+```
+
+### Hook Methods
+
+**Register server hook**
+Registers an event hook callback with optional filtering parameters.
+
+```lua
+---@overload fun(event: 'OnItemPrepared', callback: fun(payload: PreparedItemPayload), options?: HookOptions): number
+---@overload fun(event: 'OnOrderCompleted', callback: fun(payload: OrderCompletedPayload), options?: HookOptions): number
+---@overload fun(event: 'OnOrderStatusChanged', callback: fun(payload: OrderStatusChangedPayload), options?: HookOptions): number
+---@param event string Hook event identifier
+---@param callback fun(payload: table) Callback executed when event fires
+---@param options? HookOptions Optional hook filters
+---@return number hookId Unique ID of the registered hook (used to remove)
 exports.mt_restaurants:registerHook(event, callback, options)
 ```
 
 **Remove server hook**
-Unregisters a previously registered server hook by its ID
+Unregisters a previously registered server hook by its ID.
 
 ```lua
---- @param hookId number The ID of the hook returned by registerHook.
---- @return boolean success True if the hook was found and removed, false otherwise.
+---@param hookId number The ID of the hook returned by registerHook
+---@return boolean success True if hook was found and successfully removed
 exports.mt_restaurants:removeHook(hookId)
+```
+
+### Usage Examples
+
+```lua
+-- Example 1: Listen for all food/drink preparations
+exports.mt_restaurants:registerHook('OnItemPrepared', function(payload)
+    print(("[%s] Employee %s prepared %sx %s"):format(
+        payload.job,
+        payload.employeeName,
+        payload.quantity,
+        payload.outputItem
+    ))
+end, { jobFilter = 'burgershot' })
+
+-- Example 2: Listen for completed sales & integrate custom accounting
+exports.mt_restaurants:registerHook('OnOrderCompleted', function(payload)
+    print(("Order %s completed via %s for $%s paid with %s"):format(
+        payload.orderId,
+        payload.orderType,
+        payload.total,
+        payload.moneyType
+    ))
+end)
+
+-- Example 3: Listen for order state transitions (cancellations / refunds)
+exports.mt_restaurants:registerHook('OnOrderStatusChanged', function(payload)
+    print(("Order %s transitioned from %s -> %s"):format(
+        payload.orderId,
+        payload.previousState,
+        payload.newState
+    ))
+end)
 ```
