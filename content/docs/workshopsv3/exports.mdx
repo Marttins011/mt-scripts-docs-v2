@@ -1,0 +1,274 @@
+---
+title: Exports
+---
+# Explore our development exports
+
+## Client exports
+
+### toggleTestDriveCosmetics
+Toggles the vehicle cosmetics preview menu (e.g. for car dealerships during test drives). When in test drive mode, modifications can be previewed freely without workshop job restrictions, orders are not created, and original vehicle properties are restored when closed.
+
+```lua
+---@param state boolean
+---@param vehicle? number
+exports.mt_workshops:toggleTestDriveCosmetics(state, vehicle)
+```
+
+### openAdminCustoms
+Opens the cosmetics customization menu anywhere on the map with admin privileges. Modifications apply directly and save to database upon menu exit.
+
+```lua
+---@param vehicle? number
+exports.mt_workshops:openAdminCustoms(vehicle)
+```
+
+### isCosmeticsOpen
+Checks whether the cosmetics preview/order menu is currently active.
+
+```lua
+---@return boolean isOpen
+exports.mt_workshops:isCosmeticsOpen()
+```
+
+### installXenon
+Triggered to install Xenon headlight kits onto a vehicle.
+
+```lua
+exports.mt_workshops:installXenon()
+```
+
+### installUnderglow
+Triggered to install underglow neon kits onto a vehicle.
+
+```lua
+exports.mt_workshops:installUnderglow()
+```
+
+### useLightsController
+Opens the Xenon & Neon controller interface when inside/near a vehicle with lights installed.
+
+```lua
+exports.mt_workshops:useLightsController()
+```
+
+### isStanceEligibleVehicle
+Checks if a vehicle is eligible for wheel camber, offset, and suspension stance tuning (disallows bikes, bicycles, aircraft, boats, trains, etc.).
+
+```lua
+---@param vehicle number
+---@return boolean eligible
+exports.mt_workshops:isStanceEligibleVehicle(vehicle)
+```
+
+### applyVehicleStance
+Applies stance data (camber, track width offset, suspension height) to a vehicle entity.
+
+```lua
+---@param vehicle number
+---@param stanceData table
+exports.mt_workshops:applyVehicleStance(vehicle, stanceData)
+```
+
+### useToolbox
+Opens the vehicle diagnostics / parts inspection menu for the targeted vehicle.
+
+```lua
+exports.mt_workshops:useToolbox()
+```
+
+### useExtras
+Opens the vehicle extras toggle interface for the current vehicle.
+
+```lua
+exports.mt_workshops:useExtras()
+```
+
+### cleanVehicle
+Performs vehicle washing/cleaning using rag or cleaning items.
+
+```lua
+---@param slotIndex? number
+exports.mt_workshops:cleanVehicle(slotIndex)
+```
+
+### repairKitVehicle
+Initiates roadside vehicle repair using a repair kit item.
+
+```lua
+---@param slotIndex? number
+exports.mt_workshops:repairKitVehicle(slotIndex)
+```
+
+### installNitro
+Installs nitrous system bottle holder and mechanics onto a vehicle.
+
+```lua
+exports.mt_workshops:installNitro()
+```
+
+### replaceNitroBottle
+Replaces/installs a nitrous bottle in an existing vehicle bottle slot.
+
+```lua
+exports.mt_workshops:replaceNitroBottle()
+```
+
+### installAntiLag
+Installs an anti-lag valve system onto a vehicle's exhaust (requires Turbo to be installed).
+
+```lua
+exports.mt_workshops:installAntiLag()
+```
+
+### openNitrousRefillMenu
+Opens the nitrous refill station interface.
+
+```lua
+exports.mt_workshops:openNitrousRefillMenu()
+```
+
+### getMatchingWorkshopForPlayer
+Retrieves the active workshop data for the player (based on current location, job, and duty status).
+
+```lua
+---@return table|nil workshop
+exports.mt_workshops:getMatchingWorkshopForPlayer()
+```
+
+### isVehicleCategoryBlacklisted
+Checks whether a vehicle's GTA class is blacklisted by a workshop.
+
+```lua
+---@param workshopData table
+---@param vehicle number
+---@return boolean isBlacklisted, string categoryName
+exports.mt_workshops:isVehicleCategoryBlacklisted(workshopData, vehicle)
+```
+
+### hasPendingBill
+Checks if the player has an unpaid bill at a specific workshop POS terminal.
+
+```lua
+---@param workshopId string|number
+---@return boolean hasBill
+exports.mt_workshops:hasPendingBill(workshopId)
+```
+
+### getMileage
+Returns the mileage in kilometers of the player's current vehicle.
+
+```lua
+---@return number km
+exports.mt_workshops:getMileage()
+```
+
+### getMileageByEntity
+Returns the mileage in kilometers of a vehicle entity.
+
+```lua
+---@param vehicle number
+---@return number km
+exports.mt_workshops:getMileageByEntity(vehicle)
+```
+
+### getMileageByPlate
+Requests and returns the mileage in kilometers of a vehicle by its plate string.
+
+```lua
+---@param plate string
+---@return number km
+exports.mt_workshops:getMileageByPlate(plate)
+```
+
+### getUnit
+Returns the measurement unit used by the mileage system (`"kilometers"`).
+
+```lua
+---@return string unit
+exports.mt_workshops:getUnit()
+```
+
+---
+
+## Server exports
+
+### toggleTestDriveCosmetics
+Triggers the test-drive cosmetics preview menu for a target player source.
+
+```lua
+---@param source number
+---@param state boolean
+---@param vehicleNetId? number
+exports.mt_workshops:toggleTestDriveCosmetics(source, state, vehicleNetId)
+```
+
+### openAdminCustoms
+Triggers the admin vehicle customization menu for a target player source.
+
+```lua
+---@param source number
+---@param vehicleNetId? number
+exports.mt_workshops:openAdminCustoms(source, vehicleNetId)
+```
+
+### getVehicleStance
+Retrieves the saved/cached stance table for a vehicle plate.
+
+```lua
+---@param plate string
+---@return table|nil stanceData
+exports.mt_workshops:getVehicleStance(plate)
+```
+
+### setVehicleStance
+Sets and synchronizes the stance table for a vehicle and saves to database if owned.
+
+```lua
+---@param vehicle number
+---@param stanceData table
+exports.mt_workshops:setVehicleStance(vehicle, stanceData)
+```
+
+### getPlateWearCache
+Gets the in-memory wear and durability data for a vehicle plate.
+
+```lua
+---@param plate string
+---@return table wearData
+exports.mt_workshops:getPlateWearCache(plate)
+```
+
+### setPlateWearCache
+Updates the in-memory wear and durability data cache for a vehicle plate.
+
+```lua
+---@param plate string
+---@param wearData table
+exports.mt_workshops:setPlateWearCache(plate, wearData)
+```
+
+### getMileageByEntity
+Returns the current mileage in kilometers of a vehicle entity.
+
+```lua
+---@param vehicle number
+---@return number km
+exports.mt_workshops:getMileageByEntity(vehicle)
+```
+
+### getMileageByPlate
+Returns the mileage in kilometers of a vehicle plate from cache or database.
+
+```lua
+---@param plate string
+---@return number km
+exports.mt_workshops:getMileageByPlate(plate)
+```
+
+### getUnit
+Returns the measurement unit used by the mileage system (`"kilometers"`).
+
+```lua
+---@return string unit
+exports.mt_workshops:getUnit()
+```

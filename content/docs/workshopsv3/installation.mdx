@@ -1,0 +1,192 @@
+---
+title: Installation
+---
+# Learn how to install our Workshops v3 Script
+
+## Inventory Items
+This are the items to add in the `ox_inventory\data\items.lua`
+
+**Required items**
+```lua copy
+-- Workshops
+['toolbox'] = {
+    label = 'Toolbox',
+    weight = 1000,
+    stack = true,
+    close = true,
+    useable = true,
+    client = {
+        export = 'mt_workshops.useToolbox'
+    }
+},
+['cosmetics'] = {
+    label = 'Vehicle Cosmetics',
+    weight = 250,
+    stack = true,
+    close = true
+},
+['wheels'] = {
+    label = 'Vehicle Wheels',
+    weight = 1000,
+    stack = true,
+    close = true
+},
+['spraypaint'] = {
+    label = 'Vehicle Paint',
+    weight = 100,
+    stack = true,
+    close = true
+},
+['extras'] = {
+    label = 'Vehicle Extras',
+    useable = true,
+    weight = 250,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_workshops.useExtras'
+    }
+},
+['xenons'] = {
+    label = 'Xenons',
+    useable = true,
+    weight = 250,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_workshops.installXenon'
+    }
+},
+['underglow'] = {
+    label = 'Neons Kit',
+    useable = true,
+    weight = 250,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_workshops.installUnderglow'
+    }
+},
+['lightscontroller'] = {
+    label = 'Lights Controller',
+    useable = true,
+    weight = 250,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_workshops.useLightsController'
+    }
+},
+['stancingkit'] = {
+    label = 'Stancing Kit',
+    weight = 250,
+    stack = true,
+    close = true
+},
+['antilag'] = {
+    label = 'Anti-Lag Valve',
+    weight = 1500,
+    stack = true,
+    close = true
+},
+['repairkit'] = {
+    label = 'Repair Kit',
+    useable = true,
+    weight = 500,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_workshops.repairKitVehicle'
+    }
+},
+['cleaningkit'] = {
+    label = 'Vehicle cleaning kit',
+    useable = true,
+    weight = 250,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_workshops.cleanVehicle'
+    }
+},
+['nitrokit'] = {
+    label = 'Nitrous Kit',
+    useable = true,
+    weight = 250,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_workshops.installNitro'
+    }
+},
+['nitrobottle'] = {
+    label = 'Nitrous Bottle',
+    useable = true,
+    weight = 250,
+    stack = true,
+    close = true,
+    client = {
+        export = 'mt_workshops.replaceNitroBottle'
+    }
+},
+['tires'] = {
+    label = 'Tires',
+    weight = 1000,
+    stack = true
+},
+['drifttires'] = {
+    label = 'Drift Tires',
+    weight = 1000,
+    stack = true
+},
+['oil'] = {
+    label = 'Vehicle Oil',
+    weight = 100,
+    stack = true
+},
+['coolant'] = {
+    label = 'Coolant',
+    weight = 100,
+    stack = true
+},
+['engine'] = {
+    label = 'Engine',
+    weight = 1000,
+    stack = true
+},
+['body'] = {
+    label = 'Body',
+    weight = 1000,
+    stack = true
+},
+['transmission'] = {
+    label = 'Transmission',
+    weight = 1000,
+    stack = true
+},
+['brakes'] = {
+    label = 'Brakes',
+    weight = 1000,
+    stack = true
+},
+['suspension'] = {
+    label = 'Suspension',
+    weight = 1000,
+    stack = true
+},
+['turbo'] = {
+    label = 'Turbo',
+    weight = 1000,
+    stack = true
+},
+```
+
+## Conflicting scripts
+To use our script you might need to remove some scripts like qbx_mechanicjob or qb-mechanicjob or any other mechanicjob that might be conflicting with ours, qb-vehiclefailure or any other script that might change or manage the damage of the vehicles.
+
+<div>
+  <strong>That's it, the script is installed!</strong>
+    <p className="mt-2">Everything else in the script will be automatically configured: framework, sql, jobs, etc.</p>
+    <p className="mt-2">Now ingame use the command /workshopscreator and configure everything as you prefer!</p>
+    <p className="mt-2">If you need help with anything extra, please open ticket in our discord.</p>
+</div>
